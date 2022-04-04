@@ -15,17 +15,22 @@ public class DictionaryController {
     @Autowired
     private DictionaryService dictionaryService;
 
+//    @RequestMapping("/")
+//    public void testDefinition (){
+//        MainDictionary[] test = dictionaryService.retrieveDictionaryData("run");
+//        System.out.println(test[0].getMeanings().get(1).getDefinitions().get(2).getDefinition());
+//    }
     @RequestMapping("/")
-    public void testDefinition (){
-        MainDictionary[] test = dictionaryService.retrieveDictionaryData("run");
-        //
-        System.out.println(test[0].getMeanings().get(1).getDefinitions().get(2).getDefinition());
+    public String runExample (ModelMap modelMap) {
+        MainDictionary[] testExample = dictionaryService.retrieveDictionaryData("run");
+        modelMap.put("dictionaryKey", testExample[0]);
+        return "home";
     }
 
-//    @RequestMapping("/search")
-//    public String searchResult (@RequestParam("searchinput") String wordEntered, ModelMap modelMap){
-//        MainDictionary[] userWordEntered = dictionaryService.retrieveDictionaryData(wordEntered);
-//        modelMap.put("dictionaryKey", userWordEntered);
-//        return "home";
-//    }
+    @RequestMapping("/search")
+    public String searchResult (@RequestParam("searchinput") String wordEntered, ModelMap modelMap){
+        MainDictionary[] userWordEntered = dictionaryService.retrieveDictionaryData(wordEntered);
+        modelMap.put("dictionaryKey", userWordEntered[0]);
+        return "home";
+    }
 }
