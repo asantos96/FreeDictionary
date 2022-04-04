@@ -2,17 +2,30 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+
+    <link rel="stylesheet" th:href="@{/app.css}" />
+    <title>Free Dictionary</title>
 </head>
 <body>
-
+<h1> ONLINE DICTIONARY </h1>
+<h2>Please enter a word you would like to search for below. </h2>
 <form action="/search" >
     <input name="searchinput" type="search" placeholder="Search word" required="required" autocomplete="off"/>
 </form>
 
 <p th:text= "${dictionaryKey.word}" ></p>
 
-<p th:text= "${dictionaryKey.meanings[0].definitions[0].definition}" ></p>
+<!--for each loop-->
+<div th:each="definitions : ${dictionaryKey}">
+    <p th:text="${definitionsStat.index}"></p>
+    <p th:text="${definitions}"></p>
+</div>
 
+<div class ="defs">
+<p th:text= "${dictionaryKey.meanings[0].definitions[0].definition}" ></p>
+<p th:text= "${dictionaryKey.meanings[1].definitions[0].definition}" ></p>
+<p th:text= "${dictionaryKey.meanings[1].definitions[1].definition}" ></p>
+<p th:text= "${dictionaryKey.meanings[1].definitions[2].definition}" ></p>
+</div>
 </body>
 </html>

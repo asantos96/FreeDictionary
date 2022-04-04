@@ -20,17 +20,29 @@ public class DictionaryController {
 //        MainDictionary[] test = dictionaryService.retrieveDictionaryData("run");
 //        System.out.println(test[0].getMeanings().get(1).getDefinitions().get(2).getDefinition());
 //    }
+//    @RequestMapping("/")
+//    public String runExample (ModelMap modelMap) {
+//        MainDictionary[] testExample = dictionaryService.retrieveDictionaryData("run");
+//        modelMap.put("dictionaryKey", testExample[0]);
+//        return "home";
+//    }
+
+    // gets the array and returns the entire object
+    public MainDictionary getDictionaryEntry (String userInput){
+        return dictionaryService.retrieveDictionaryData(userInput)[0];
+    }
+
     @RequestMapping("/")
-    public String runExample (ModelMap modelMap) {
-        MainDictionary[] testExample = dictionaryService.retrieveDictionaryData("run");
-        modelMap.put("dictionaryKey", testExample[0]);
+    public String displayHome (String wordEntered, ModelMap modelMap) {
+        modelMap.put("dictionaryKey", getDictionaryEntry(wordEntered));
         return "home";
     }
 
     @RequestMapping("/search")
     public String searchResult (@RequestParam("searchinput") String wordEntered, ModelMap modelMap){
-        MainDictionary[] userWordEntered = dictionaryService.retrieveDictionaryData(wordEntered);
-        modelMap.put("dictionaryKey", userWordEntered[0]);
+//        MainDictionary[] userWordEntered = dictionaryService.retrieveDictionaryData(wordEntered);
+//        modelMap.put("dictionaryKey", userWordEntered[0]);
+        modelMap.put("dictionaryKey", getDictionaryEntry(wordEntered));
         return "home";
     }
 }
